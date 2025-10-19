@@ -13,7 +13,11 @@ public class StringCalculator {
         String delimiter = ",|:";
         String numbersText = text;
 
-        Pattern pattern = Pattern.compile("//(.)\\\\\\\\n(.*)");
+        // The test input string is "//;\\n1", which is a literal backslash and 'n'.
+        // The regex needs to match a literal backslash, which requires four backslashes in the Java string literal:
+        // 1. Java string parser: "\\\\" -> "\\"
+        // 2. Regex parser: "\\" -> "\"
+        Pattern pattern = Pattern.compile("//(.)\\\\n(.*)");
         Matcher matcher = pattern.matcher(text);
         if (matcher.find()) {
             delimiter = Pattern.quote(matcher.group(1));
@@ -25,6 +29,15 @@ public class StringCalculator {
         }
 
         try {
+            // Handle the case where the input is just a number without delimiters
+            if (!numbersText.contains(delimiter.replace("\\", ""))) {
+                int number = Integer.parseInt(numbersText);
+                if (number < 0) {
+                    throw new IllegalArgumentException("Negative numbers are not allowed.");
+                }
+                return number;
+            }
+
             int[] numbers = Arrays.stream(numbersText.split(delimiter))
                     .mapToInt(Integer::parseInt)
                     .toArray();
