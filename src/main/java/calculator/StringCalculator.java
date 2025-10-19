@@ -24,9 +24,18 @@ public class StringCalculator {
             return 0;
         }
 
-        String[] numbers = numbersText.split(delimiter);
-        return Arrays.stream(numbers)
-                .mapToInt(Integer::parseInt)
-                .sum();
+        try {
+            int[] numbers = Arrays.stream(numbersText.split(delimiter))
+                    .mapToInt(Integer::parseInt)
+                    .toArray();
+
+            if (Arrays.stream(numbers).anyMatch(n -> n < 0)) {
+                throw new IllegalArgumentException("Negative numbers are not allowed.");
+            }
+
+            return Arrays.stream(numbers).sum();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Input contains non-numeric values.");
+        }
     }
 }
