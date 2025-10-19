@@ -10,11 +10,11 @@
 - [X] 변환된 숫자들의 합을 계산하는 기능
 
 #### 2. 예외 처리
-- [ ] 분리된 문자열이 숫자가 아닐 경우 `IllegalArgumentException` 발생 기능
-- [ ] 입력된 숫자가 음수일 경우 `IllegalArgumentException` 발생 기능
+- [X] 분리된 문자열이 숫자가 아닐 경우 `IllegalArgumentException` 발생 기능
+- [X] 입력된 숫자가 음수일 경우 `IllegalArgumentException` 발생 기능
 
 #### 3. 입출력 처리
 - [x] "덧셈할 문자열을 입력해 주세요." 안내 문구 출력 기능
 - [x] `Console.readLine()`을 통해 사용자 입력 받는 기능
 - [x] 계산된 결과를 "결과 : [결과값]" 형식으로 출력하는 기능
-- [ ] `IllegalArgumentException` 발생 시 애플리케이션이 종료되도록 처리
+- [X] `IllegalArgumentException` 발생 시 애플리케이션이 종료되도록 처리
